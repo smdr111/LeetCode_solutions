@@ -1,0 +1,13 @@
+class Solution:
+    def lengthOfLastWord(self, s):
+        result=''
+        x=len(s)
+        while s.endswith(' '):
+            x-=1
+            s=s[:x]
+        for i in s[::-1]:
+            if i == ' ':
+                break
+            else:
+                result+=i
+        return len(result)

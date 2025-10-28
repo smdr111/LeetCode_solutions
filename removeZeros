@@ -1,0 +1,7 @@
+class Solution:
+    def removeZeros(self, n: int) -> int:
+        b = ''
+        for i in str(n):
+            if i !='0':
+                b+=i
+        return int(b)

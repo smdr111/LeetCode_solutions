@@ -1,0 +1,19 @@
+def ascii_solution(encoded):
+  encoded = encoded[::-1]
+  ascii_dict = {} 
+  for ch in range(ord('A'), ord('Z') + 1): 
+    ascii_dict[chr(ch)] = ch 
+  for ch in range(ord('a'), ord('z') + 1): 
+    ascii_dict[chr(ch)] = ch 
+  ascii_dict[' '] = 32 
+  ascii_dict = {v: k for k, v in ascii_dict.items()} 
+  result=''
+  j=1
+  while encoded:
+    if int(encoded[:j]) in ascii_dict:
+      result+=ascii_dict[int(encoded[:j])]
+      encoded=encoded[j:]
+      j=1
+      continue
+    j+=1
+  return result

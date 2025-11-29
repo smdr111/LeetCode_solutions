@@ -1,0 +1,15 @@
+import pandas as pd
+
+def second_highest_salary(employee: pd.DataFrame) -> pd.DataFrame:
+    distinct = employee[['salary']].drop_duplicates().sort_values(by='salary',ascending=False)
+    distinct.rename(columns={'salary':'SecondHighestSalary'},inplace=True)
+    if len(distinct)>1:
+        return distinct.iloc[[1]]
+    elif len(distinct)==1:
+        distinct['SecondHighestSalary'] = None
+        return distinct[['SecondHighestSalary']]
+    else: return pd.DataFrame({'SecondHighestSalary':[None]})
+
+
+
+    

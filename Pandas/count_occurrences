@@ -1,0 +1,21 @@
+import pandas as pd
+import re
+def count_occurrences(files: pd.DataFrame) -> pd.DataFrame:
+    bull_pattern = r"(?<=\s)bull(?=\s)"
+    bear_pattern = r"(?<=\s)bear(?=\s)"
+
+    bull_count = 0
+    bear_count = 0
+
+    for i in range(len(files)):
+        content = files.loc[i, "content"]
+
+        if re.search(bull_pattern, content):
+            bull_count += 1
+        if re.search(bear_pattern, content):
+            bear_count += 1
+
+    return pd.DataFrame({
+        "word": ["bull", "bear"],
+        "count": [bull_count, bear_count]
+    })

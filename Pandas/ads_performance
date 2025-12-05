@@ -1,0 +1,16 @@
+import pandas as pd
+
+def ads_performance(ads: pd.DataFrame) -> pd.DataFrame:
+    summary = ads.groupby('ad_id').apply(lambda g: pd.Series({
+        'clicked': (g['action'] == 'Clicked').sum(),
+        'viewed': (g['action'] == 'Viewed').sum()})).reset_index()
+    summary['ctr'] = summary.apply(lambda row: row['clicked'] / (row['clicked'] + row['viewed'])*100 if (row['clicked'] + row['viewed']) > 0 else 0,axis=1)
+    summary['ctr'] = summary['ctr'].round(2)
+    summary = summary.sort_values(['ctr', 'ad_id'], ascending=[False, True])
+    return summary[['ad_id','ctr']]
+
+
+
+    
+    
+    

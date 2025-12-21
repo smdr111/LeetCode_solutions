@@ -1,0 +1,10 @@
+import pandas as pd
+
+def accepted_candidates(candidates: pd.DataFrame, rounds: pd.DataFrame) -> pd.DataFrame:
+    merged = candidates.merge(rounds, on="interview_id")
+    merged = merged[merged['years_of_exp']>=2]
+    result = merged.groupby('candidate_id')['score'].sum().reset_index()
+    return result[result['score']>15][['candidate_id']]
+
+
+    
